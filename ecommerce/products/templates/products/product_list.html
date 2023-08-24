@@ -8,30 +8,14 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.1/dist/full.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="max-w-6xl mx-auto">
-    <div class="navbar bg-base-200">
-        <div class="flex-1">
-            <a href="{% url 'products:product_list' %}" class="btn btn-ghost normal-case text-xl hover:bg-base-200">Ecommerce Django</a>
-        </div>
-        <div class="flex-none gap-2">
-            <form method="GET" action="{% url 'products:product_list' %}">
-                <div class="form-control">
-                    <div class="input-group">
-                        <input type="search" name="search_field" placeholder="Search by name" class="input input-bordered w-24 md:w-auto" autocomplete="off" />
-                        <button class="btn btn-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    {% include './navbar.html' %}
     {% include './messages.html' %}
     {% if products %}
         <h1 class="text-4xl font-serif font-medium text-center my-5">All Products</h1>
-        <div class="mb-5 grid grid-cols-3 gap-8">
+        <div class="mb-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for product in products %}
                 <div class="card card-compact bg-base-100 shadow-lg border">
-                    <figure><img src="{{ product.products_image.url }}" alt="{{ product.products_name }}" /></figure>
+                    <figure><img class="w-60 h-60" src="{{ product.products_image.url }}" alt="{{ product.products_name }}" /></figure>
                     <div class="card-body mt-3">
                         <h2 class="card-title">{{ product.products_name }}</h2>
                         <p class="text-sm">{{ product.products_description | linebreaksbr }}</p>

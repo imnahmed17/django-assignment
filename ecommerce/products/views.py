@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
-from .models import Product
+from .models import Product, Review
 
 
 def product_list(request):
@@ -21,3 +21,14 @@ def product_list(request):
 def product_details(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     return render(request, 'products/product_details.html', {'product': product})
+
+
+def add_review(request, product_id):
+    if request.method == 'POST':
+        product = get_object_or_404(Product, pk=product_id)
+        content = request.POST.get('review_content')
+        rating = int(request.POST.get('review_rating'))
+        
+        Review.objects.create(product=product, content=content, rating=rating)
+    
+    return redirect('product_details', product_id=product_id)
