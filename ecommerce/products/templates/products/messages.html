@@ -1,0 +1,20 @@
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags %}
+        <div id="alert" class="alert alert-{{ message.tags }} hidden shadow transition ease-in-out duration-500">
+            <span>{{ message }}</span>
+        </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const alert = document.getElementById('alert');
+        alert.classList.remove('hidden');
+        
+        setTimeout(function() {
+            alert.classList.add('hidden');
+        }, 1100);
+    });
+</script>
