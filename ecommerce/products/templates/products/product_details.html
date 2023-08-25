@@ -6,13 +6,13 @@
     <title>Ecommerce Django</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.1/dist/full.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
 </head>
 <body class="max-w-6xl mx-auto">
     {% include './navbar.html' %}
     {% include './messages.html' %}
+    {% load custom_star_tags %}
     <!-- product details -->
     <h1 class="text-4xl font-serif font-medium text-center my-5">Product Details</h1>
     <div class="mt-10 hero bg-base-200">
@@ -22,8 +22,11 @@
             </div>
             <div class="w-full md:w-1/2 text-center lg:text-left">
                 <h1 class="text-5xl font-medium">{{ product.products_name }}</h1>
-                <p class="py-6">{{ product.products_description | linebreaksbr }}</p>
+                <p class="py-4">{{ product.products_description | linebreaksbr }}</p>
                 <p class="text-orange-600">${{ product.products_price }}</p>
+                {% if product.products_rating %}
+                    <p class="text-lg">{{ product.products_rating|stars_display|safe }}</p>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -35,9 +38,8 @@
                 <div class="space-y-0">
                     {% for review in product.review_set.all %}
                         <div class="border px-4 py-2">
-                            {% load custom_star_tags %}
                             <div class="flex justify-between items-center">
-                                <p>{{ review.review_rating|stars_display|safe }}</p>
+                                <p class="text-lg">{{ review.review_rating|stars_display|safe }}</p>
                                 <p class="text-sm text-slate-500">{{ review.formatted_created_at }}</p>
                             </div>
                             <p class="text-sm text-slate-500 leading-none">by {{ review.review_user }}</p>

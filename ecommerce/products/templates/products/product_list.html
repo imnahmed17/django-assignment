@@ -6,10 +6,13 @@
     <title>Ecommerce Django</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.1/dist/full.css" rel="stylesheet" type="text/css" />
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
 </head>
 <body class="max-w-6xl mx-auto">
     {% include './navbar.html' %}
     {% include './messages.html' %}
+    {% load custom_star_tags %}
     {% if products %}
         <h1 class="text-4xl font-serif font-medium text-center my-5">All Products</h1>
         <div class="mb-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -18,8 +21,13 @@
                     <figure><img class="w-60 h-60" src="{{ product.products_image.url }}" alt="{{ product.products_name }}" /></figure>
                     <div class="card-body mt-3">
                         <h2 class="card-title">{{ product.products_name }}</h2>
-                        <p class="text-sm">{{ product.products_description | linebreaksbr }}</p>
                         <p class="text-orange-600 text-base">${{ product.products_price }}</p>
+                        {% if product.products_rating %}
+                            <div class="flex items-center gap-1">
+                                <p class="text-lg">{{ product.products_rating|stars_display|safe }}</p>
+                                <p class="text-sm text-slate-500">({{ product.review_set.count }})</p>
+                            </div>
+                        {% endif %}
                         <div class="card-actions justify-end">
                             <a href="{% url 'products:product_details' product.products_id %}" class="btn btn-primary">Show Details</a>
                         </div>

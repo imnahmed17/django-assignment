@@ -1,10 +1,11 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Product(models.Model):
     products_id = models.AutoField(primary_key=True)
     products_name = models.CharField(max_length=100)
     products_price = models.DecimalField(max_digits=10, decimal_places=2)
-    products_rating = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
+    products_rating = models.DecimalField(max_digits=3, decimal_places=2, validators=[MinValueValidator(1), MaxValueValidator(5)], null=True, blank=True)
     products_description = models.TextField()
     products_image = models.ImageField(upload_to='images')
 
