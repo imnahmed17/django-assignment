@@ -25,10 +25,18 @@ def product_details(request, product_id):
 
 def add_review(request, product_id):
     if request.method == 'POST':
+        uname = request.POST.get('uname')
+        rating = request.POST.get('rating')
+        content = request.POST.get('content')
         product = get_object_or_404(Product, pk=product_id)
-        content = request.POST.get('review_content')
-        rating = int(request.POST.get('review_rating'))
-        
-        Review.objects.create(product=product, content=content, rating=rating)
+
+        if not uname:
+            uname = 'Anonymous'
+
+        if rating and content:
+            review = Review(review_product=product, review_user=uname, review_rating=rating, review_content=content)
+            review.save()
+        else:
+            messages.error(request, 'Rating and review field required.')
     
-    return redirect('product_details', product_id=product_id)
+    return redirect('products:product_details', product_id=product_id)

@@ -11,10 +11,12 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const alert = document.getElementById('alert');
-        alert.classList.remove('hidden');
         
-        setTimeout(function() {
-            alert.classList.add('hidden');
-        }, 1100);
+        if (alert){
+            alert.classList.remove('hidden');
+            setTimeout(function() {
+                alert.classList.add('hidden');
+            }, 1100);
+        }
     });
 </script>

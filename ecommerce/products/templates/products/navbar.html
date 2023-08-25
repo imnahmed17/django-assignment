@@ -4,7 +4,6 @@
     </div>
     <div class="flex-none gap-2">
         <form method="GET" action="{% url 'products:product_list' %}">
-            {% csrf_token %}
             <div class="form-control">
                 <div class="input-group">
                     <input type="search" name="search_field" placeholder="Search by name" class="input input-bordered w-24 md:w-auto" autocomplete="off" />

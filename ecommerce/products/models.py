@@ -15,8 +15,13 @@ class Product(models.Model):
 class Review(models.Model):
     review_id = models.AutoField(primary_key=True)
     review_product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    review_user = models.CharField(max_length=50, null=True, blank=True)
     review_rating = models.DecimalField(max_digits=2, decimal_places=1)
     review_content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.review_product.products_name
+    
+    def formatted_created_at(self):
+        return self.created_at.strftime('%d %b %Y')
