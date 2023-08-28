@@ -6,8 +6,7 @@ class Product(models.Model):
     products_id = models.AutoField(primary_key=True)
     products_name = models.CharField(max_length=100)
     products_price = models.DecimalField(max_digits=10, decimal_places=2)
-    products_rating = models.DecimalField(max_digits=3, decimal_places=2, validators=[
-                                          MinValueValidator(1), MaxValueValidator(5)], null=True, blank=True)
+    products_rating = models.DecimalField(max_digits=3, decimal_places=2, validators=[MinValueValidator(1), MaxValueValidator(5)], null=True, blank=True)
     products_description = models.TextField()
     products_image = models.ImageField(upload_to='images')
 
@@ -19,7 +18,7 @@ class Review(models.Model):
     review_id = models.AutoField(primary_key=True)
     review_product = models.ForeignKey(Product, on_delete=models.CASCADE)
     review_user = models.CharField(max_length=50, null=True, blank=True)
-    review_rating = models.DecimalField(max_digits=2, decimal_places=1)
+    review_rating = models.DecimalField(max_digits=2, decimal_places=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
     review_content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

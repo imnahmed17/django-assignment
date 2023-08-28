@@ -45,9 +45,9 @@ docker-compose up -d
 Now open your browser and type `http://localhost:8080` into the url to access PostgreSQL. For login give Email: admin@user.com and Password: adminuser. After that, right click on `Server > Register > Server` in left sidemenu. In general tab give type any name you want as Server name. In connection tab give Host name: postgres, Username: myuser, Password: mypassword and save it. Then nevigate your server name and create a database right clicking on your server name.
 
 **5. Environment variable setup:**
+
 Create a `.env` file in the same directory where `settings.py` resides and add the following key-value pair inside the file.
 ```bash
-SECRET_KEY=0x!b#(1*cd73w$&azzc6p+essg7v=g80ls#z&xcx*mpemx&@9$
 DATABASE_NAME=db_name
 DATABASE_USER=myuser
 DATABASE_PASSWORD=mypassword
