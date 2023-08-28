@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
+    {% load custom_star_tags %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecommerce Django</title>
@@ -12,7 +14,6 @@
 <body class="max-w-6xl mx-auto">
     {% include './navbar.html' %}
     {% include './messages.html' %}
-    {% load custom_star_tags %}
     {% if products %}
         <h1 class="text-4xl font-serif font-medium text-center my-5">All Products</h1>
         <div class="mb-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -38,5 +39,6 @@
     {% else %}
         <h1 class="text-4xl font-serif font-medium text-center my-5">No product found</h1>
     {% endif %}
+    <script src="{% static 'js/products/suggestion.js' %}"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
 from .models import Product, Review
 from django.db.models import Avg
+from django.http import JsonResponse
 
 
 def product_list(request):
@@ -16,6 +17,14 @@ def product_list(request):
             products = products.filter(products_name__icontains=query)
 
     return render(request, 'products/product_list.html', {'products': products, 'query': query})
+
+
+def get_product_name_suggestions(request):
+    query = request.GET.get('query', '')
+    if len(query) >= 3:
+        suggestions = Product.objects.filter(products_name__icontains=query).values_list('products_name', flat=True)
+        return JsonResponse({'suggestions': list(suggestions)})
+    return JsonResponse({'suggestions': []})
 
 
 def product_details(request, product_id):
