@@ -24,8 +24,8 @@
                         <p class="text-orange-600 text-base">${{ product.products_price }}</p>
                         {% if product.products_rating %}
                             <div class="flex items-center gap-1">
-                                <p class="text-lg">{{ product.products_rating|stars_display|safe }}</p>
-                                <p class="text-sm text-slate-500">({{ product.review_set.count }})</p>
+                                <div>{{ product.products_rating|stars_display|safe }}</div>
+                                <p class="text-lg text-slate-500 ">({{ product.review_set.count }})</p>
                             </div>
                         {% endif %}
                         <div class="card-actions justify-end">

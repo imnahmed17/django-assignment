@@ -3,6 +3,7 @@ from django.utils.safestring import mark_safe
 
 register = template.Library()
 
+
 @register.filter
 def stars_display(rating_value):
     full_stars = int(rating_value)
